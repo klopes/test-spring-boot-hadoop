@@ -1,0 +1,57 @@
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+buildscript {
+
+    repositories {
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC1")
+    }
+}
+
+repositories {
+    maven { url 'http://hgat01lax01us.prod.auction.local:8080/nexus/content/repositories/public' }
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+
+
+
+    compile("org.springframework.boot:spring-boot-starter-web:1.1.0.RC1") {
+        exclude module: "spring-boot-starter-tomcat"
+        exclude module:'logback-classic'
+        exclude module:'log4j-over-slf4j'
+    }
+
+    compile("org.springframework.boot:spring-boot-starter-jetty:1.1.0.RC1")
+    compile 'org.apache.commons:commons-lang3:3.0'
+    runtime 'commons-lang:commons-lang:2.3'
+
+
+    compile ('org.springframework.data:spring-data-hadoop:1.0.2.RELEASE'){
+        exclude group: "org.mortbay.jetty"
+        exclude module: "servlet-api"
+        exclude group: 'javax.servlet'
+        exclude group: 'tomcat'
+        exclude group: 'commons-codec'
+//        exclude group: 'commons-httpclient'
+        exclude group: 'commons-lang'
+    }
+    compile ('org.apache.hbase:hbase:0.94.3'){
+        exclude group: "org.mortbay.jetty"
+        exclude module: "servlet-api"
+        exclude group: 'javax.servlet'
+        exclude group: 'tomcat'
+        exclude group: 'commons-codec'
+//        exclude group: 'commons-httpclient'
+        exclude group: 'commons-lang'
+    }
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
