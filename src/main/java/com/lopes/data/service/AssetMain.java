@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * Created by klopes on 3/24/14.
  */
+
 @EnableAutoConfiguration
 @ComponentScan
 public class AssetMain {
